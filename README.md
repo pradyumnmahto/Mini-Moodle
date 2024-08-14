@@ -1,6 +1,5 @@
 # Welcome to our project: Portal for The Courses
 
-### <b>Team Name:<b/> "help me."<br/>
 
 ## About the Project:
 I developed a learning environment/ Course Management System similar to Moodle.<br/>
