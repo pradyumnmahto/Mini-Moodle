@@ -1,0 +1,17 @@
+{% autoescape off %}
+Hello,
+
+You have been invited to join a course:
+
+Click on the following link to register for the course dirctly
+
+{{ protocol }}://{{ domain }}{% url 'main:join_course' uidb64=uid token=token course_id=course_id %}
+
+or Join via the following course code on the course website
+
+{{ course_id }}
+
+Sincerely,
+The Website Team
+
+{% endautoescape %}

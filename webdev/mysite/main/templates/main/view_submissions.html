@@ -1,0 +1,84 @@
+{% extends 'main/header.html' %}
+{% load static %}
+{% block title %}Assignments{% endblock %}
+
+
+{% block content %}
+
+    <div class="container">
+
+        <div class="col-12 col-sm-6 col-md-10">
+                    <strong><h3>Assignments</h3></strong>
+        <hr/>
+
+            
+            {% if request.user.role == "Teacher" %}
+            {% for foo in assignment_submission %}
+                <a href="{% url 'main:manual_grade_all' name=foo.course_name title=foo.assignment_title %}?next={{ request.path|urlencode }}">Subumit CSV file to grade</a><br/>
+                <a href="{{ parent }}" download>Download all submisisons</a>
+            {% endfor %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Comment</th>
+                                <th scope="col">Download File</th>
+                                <th scope="col">Marks</th>
+                                <th scope="col">Feedback</th>
+                                <th scope="col">Submited at</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for foo in assignment_submission %}
+                            <tr>
+                                <th scope="row">{{ foo.user.username }}</td>
+                                <td>{{ foo.comment }}</td>
+                                <td><a href="{{foo.file.url}}" download>Download</a></td>
+                                <td> {{ foo.marks }}<br/><a href="{% url 'main:manual_grade' foo.id %}?next={{ request.path|urlencode }}">Grade</a></td>
+                                <td> {{ foo.feedback }}</td>
+                                <td> {{ foo.submitted_at }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                
+
+            {% elif request.user.role == "Student" %}
+        
+                {% for foo in assignment_submission %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Comment</th>
+                            <th scope="col">Download File</th>
+                            <th scope="col">Marks</th>
+                            <th scope="col">Feedback</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for foo in assignment_submission %}
+                        <tr>
+                            <th scope="row">{{ foo.user.username }}</td>
+                            <td>{{ foo.comment }}</td>
+                            <td><a href="{{foo.file.url}}" download>Download</a></td>
+                            <td> {{ foo.marks }}</td>
+                            <td>{{ foo.feedback }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endfor %}
+            {% endif %}
+            
+            <br/>
+
+
+            <br/>
+
+
+        </div>
+
+    </div>
+
+{% endblock %}

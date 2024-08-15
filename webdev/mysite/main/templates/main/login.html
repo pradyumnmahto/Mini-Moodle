@@ -1,0 +1,46 @@
+{% extends "main/header.html" %}
+{% load bootstrap %}
+{% block content %}      
+
+<!--Login--> 
+
+<div class="container">
+    <div class="row justify-content-center"  style="display: flex!important">
+    
+                    <div class="col-lg-5 mb-5 mb-lg-0" style="margin-top: 7%;">
+                        
+                        <center> <h3>Login</h3></center>
+    
+                        <form action="" method="POST">{% csrf_token %}
+    
+                            {{ form|bootstrap }}
+    
+                            <div class="row form-group text-center">
+                                <div class="col-md-12">
+                                    <input type="submit" value="Login" class="btn btn-primary btn-md text-white">
+                                </div>
+                            </div>
+    
+    
+                        </form>
+                        <small>
+                        <p class="text-center">Don't have an account? <a href="/register">Create an account</a>.</p>
+                        <p class="text-center">Forgot Password? <a href="/password_reset">Reset password</a>.</p>
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+
+<!-- <div class="container py-5">
+  <h1>Login</h1>
+  <form method="POST">
+    % csrf_token %
+     login_form|crispy 
+    <button class="btn btn-primary" type="submit">Login</button>
+  </form>
+  <p class="text-center">Don't have an account? <a href="/register">Create an account</a>.</p>
+  <p class="text-center">Forgot Password? <a href="/password_reset">Reset password</a>.</p>
+</div> -->
+
+{% endblock %}
